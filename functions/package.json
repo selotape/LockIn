@@ -1,0 +1,13 @@
+{
+  "name": "workout-timeline-functions",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {
+    "@google-cloud/functions-framework": "^3.3.0",
+    "cors": "^2.8.5",
+    "googleapis": "^131.0.0"
+  },
+  "engines": {
+    "node": "20"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "workout-timeline",
+  "version": "1.0.0",
+  "description": "Single-page web app for displaying Google Health Connect workout data",
+  "scripts": {
+    "start": "node server.js",
+    "deploy-function": "gcloud functions deploy workoutData --runtime nodejs20 --trigger http --allow-unauthenticated --source ./functions",
+    "dev": "concurrently \"npm run start\" \"npm run functions-start\"",
+    "functions-start": "cd functions && ./node_modules/.bin/functions-framework --target workoutData --port 8081"
+  },
+  "dependencies": {
+    "concurrently": "^8.2.2",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "http-server": "^14.1.1"
+  },
+  "devDependencies": {
+    "@google-cloud/functions-framework": "^3.3.0"
+  }
+}
