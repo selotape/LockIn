@@ -5,7 +5,7 @@ A single-page web application that displays your Google Health Connect workout d
 ## Features
 
 - 🔐 Google OAuth authentication
-- 📊 Workout data from Google Fit API (last 30 days)
+- 📊 Workout data from Google Fit API (last 300 days)
 - 📈 Statistics summary (total workouts, time, most active day)
 - 📱 Responsive design with cute timeline interface
 - ☁️ GCP serverless backend
@@ -82,11 +82,11 @@ npm start
 1. Open the deployed app in your browser
 2. Click "Sign in with Google"
 3. Grant permissions for Google Fit data access
-4. View your workout timeline for the last 30 days!
+4. View your workout timeline for the last 300 days!
 
 ## Troubleshooting
 
-- **No workouts showing**: Make sure you have fitness apps connected to Google Fit and have recorded workouts in the past 30 days
+- **No workouts showing**: Make sure you have fitness apps connected to Google Fit and have recorded workouts in the past 300 days
 - **Authentication errors**: Verify your OAuth Client ID is correctly configured
 - **API errors**: Ensure Google Fitness API is enabled in your GCP project
 

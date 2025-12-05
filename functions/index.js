@@ -28,10 +28,10 @@ functions.http('workoutData', async (req, res) => {
       // Initialize Google Fit API
       const fitness = google.fitness({ version: 'v1', auth: oauth2Client });
 
-      // Calculate date range (last 30 days)
+      // Calculate date range (last 300 days)
       const endTime = new Date();
       const startTime = new Date();
-      startTime.setDate(startTime.getDate() - 30);
+      startTime.setDate(startTime.getDate() - 300);
 
       // Convert to nanoseconds (Google Fit API requirement)
       const startTimeNanos = startTime.getTime() * 1000000;
