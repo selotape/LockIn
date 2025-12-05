@@ -93,6 +93,27 @@ function signOut() {
     document.getElementById('error').style.display = 'none';
 }
 
+// Handle expired token
+function handleExpiredToken() {
+    // Clear stored credentials
+    localStorage.removeItem('google_access_token');
+    accessToken = null;
+    currentUser = null;
+
+    // Reset UI to signed-out state
+    document.getElementById('signInDiv').style.display = 'block';
+    document.getElementById('signOutButton').style.display = 'none';
+    document.getElementById('timeline-container').style.display = 'none';
+    document.getElementById('no-data').style.display = 'none';
+    document.getElementById('loading').style.display = 'none';
+
+    // Show friendly error message (hide retry button since sign-in is needed)
+    document.getElementById('error-message').textContent =
+        'Your session has expired. Please sign in again to view your workout data.';
+    document.getElementById('error-retry-button').style.display = 'none';
+    document.getElementById('error').style.display = 'block';
+}
+
 // Load workout data from Cloud Function
 async function loadWorkoutData() {
     if (!accessToken) {
@@ -112,6 +133,13 @@ async function loadWorkoutData() {
         });
 
         if (!response.ok) {
+            // Handle expired/invalid token (401 Unauthorized)
+            if (response.status === 401) {
+                console.log('Token expired or invalid, clearing stored token');
+                handleExpiredToken();
+                return;
+            }
+
             const errorData = await response.json();
             throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
         }
@@ -316,6 +344,7 @@ function showLoading(show) {
 
 function showError(message) {
     document.getElementById('error-message').textContent = message;
+    document.getElementById('error-retry-button').style.display = 'block';
     document.getElementById('error').style.display = 'block';
     document.getElementById('loading').style.display = 'none';
     document.getElementById('timeline-container').style.display = 'none';
