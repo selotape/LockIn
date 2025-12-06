@@ -1,6 +1,9 @@
+const path = require('path');
+
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'jsdom',
+  rootDir: path.resolve(__dirname, '..'),
   roots: ['<rootDir>/tests/unit/frontend'],
   testMatch: ['**/*.test.ts'],
   moduleNameMapper: {
