@@ -1,0 +1,17 @@
+{
+  "extends": "./config/tsconfig.shared.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "skipLibCheck": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "types": ["node", "jest"]
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "public/dist"
+  ]
+}
