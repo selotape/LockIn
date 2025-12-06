@@ -2,3 +2,16 @@ node_modules/
 .env
 .DS_Store
 *.log
+
+# Build output
+dist/
+public/dist/
+
+# IDE and tooling
+.claude/
+.vscode/
+.idea/
+
+# Coverage
+coverage/
+*.lcov

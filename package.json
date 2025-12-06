@@ -3,18 +3,49 @@
   "version": "1.0.0",
   "description": "Single-page web app for displaying Google Health Connect workout data",
   "scripts": {
-    "start": "node server.js",
+    "build": "npm run build:backend && npm run build:frontend",
+    "build:backend": "tsc -p config/tsconfig.backend.json",
+    "build:frontend": "webpack --config config/webpack.config.js --mode production",
+    "start": "node dist/backend/server.js",
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:backend": "USE_MOCKS=true nodemon --watch src/backend -e ts --exec ts-node src/backend/server.ts",
+    "dev:frontend": "USE_MOCKS=true webpack serve --config config/webpack.config.js --mode development",
+    "test": "npm run test:backend && npm run test:frontend",
+    "test:backend": "jest --config config/jest.config.backend.js",
+    "test:frontend": "jest --config config/jest.config.frontend.js",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "lint": "eslint src/ tests/ --ext .ts",
+    "type-check": "tsc --noEmit",
     "deploy-function": "gcloud functions deploy workoutData --runtime nodejs20 --trigger http --allow-unauthenticated --source ./functions",
-    "dev": "concurrently \"npm run start\" \"npm run functions-start\"",
     "functions-start": "cd functions && ./node_modules/.bin/functions-framework --target workoutData --port 8081"
   },
   "dependencies": {
     "concurrently": "^8.2.2",
+    "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
+    "googleapis": "^167.0.0",
     "http-server": "^14.1.1"
   },
   "devDependencies": {
-    "@google-cloud/functions-framework": "^3.3.0"
+    "@google-cloud/functions-framework": "^3.3.0",
+    "@types/express": "^4.17.25",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^24.10.1",
+    "@types/supertest": "^6.0.3",
+    "@typescript-eslint/eslint-plugin": "^8.48.1",
+    "@typescript-eslint/parser": "^8.48.1",
+    "eslint": "^9.39.1",
+    "jest": "^30.2.0",
+    "nodemon": "^3.1.11",
+    "supertest": "^7.1.4",
+    "ts-jest": "^29.4.6",
+    "ts-loader": "^9.5.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3",
+    "webpack": "^5.103.0",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.2"
   }
 }
