@@ -11,16 +11,16 @@ declare global {
       USE_MOCKS?: string;
     };
   }
-}
 
-// Webpack DefinePlugin will inject these at build time
-// Using namespace to avoid conflict with Node.js process global
-declare namespace NodeJS {
-  interface ProcessEnv {
-    USE_MOCKS?: string;
-    GOOGLE_CLIENT_ID?: string;
-    API_BASE_URL?: string;
-  }
+  // Webpack DefinePlugin will replace these at build time
+  // Using var declarations to avoid TS errors
+  var process: {
+    env: {
+      USE_MOCKS?: string;
+      GOOGLE_CLIENT_ID?: string;
+      API_BASE_URL?: string;
+    };
+  };
 }
 
 /**
