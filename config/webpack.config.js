@@ -4,6 +4,11 @@ const webpack = require('webpack');
 module.exports = (env, argv) => {
   const isDevelopment = argv.mode === 'development';
 
+  // Default to mocks in development mode
+  const useMocks = process.env.USE_MOCKS !== undefined
+    ? process.env.USE_MOCKS
+    : (isDevelopment ? 'true' : 'false');
+
   return {
     entry: './src/frontend/main.ts',
     output: {
@@ -48,7 +53,7 @@ module.exports = (env, argv) => {
     },
     plugins: [
       new webpack.DefinePlugin({
-        'process.env.USE_MOCKS': JSON.stringify(process.env.USE_MOCKS || 'false'),
+        'process.env.USE_MOCKS': JSON.stringify(useMocks),
         'process.env.API_BASE_URL': JSON.stringify(process.env.API_BASE_URL || 'http://localhost:8080'),
         'process.env.GOOGLE_CLIENT_ID': JSON.stringify(process.env.GOOGLE_CLIENT_ID || '')
       })
