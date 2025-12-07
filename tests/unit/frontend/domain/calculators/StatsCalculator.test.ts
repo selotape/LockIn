@@ -36,8 +36,8 @@ describe('StatsCalculator', () => {
     it('should calculate correct total duration', () => {
       const stats = StatsCalculator.calculateStats(VARIED_DURATION_WORKOUTS);
 
-      // 30m + 2h + 45m = 3.25 hours
-      expect(stats.totalTimeHours).toBeCloseTo(3.2, 1);
+      // 30m + 2h + 45m = 3.25 hours, rounds to 3.3
+      expect(stats.totalTimeHours).toBeCloseTo(3.3, 1);
     });
   });
 
@@ -59,8 +59,8 @@ describe('StatsCalculator', () => {
     it('should calculate total hours (rounded)', () => {
       const hours = StatsCalculator.calculateTotalHours(VARIED_DURATION_WORKOUTS);
 
-      // 11700000 ms = 3.25 hours
-      expect(hours).toBeCloseTo(3.2, 1);
+      // 11700000 ms = 3.25 hours, rounds to 3.3
+      expect(hours).toBeCloseTo(3.3, 1);
     });
 
     it('should return 0 for empty array', () => {

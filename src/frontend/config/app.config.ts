@@ -13,6 +13,16 @@ declare global {
   }
 }
 
+// Webpack DefinePlugin will inject these at build time
+// Using namespace to avoid conflict with Node.js process global
+declare namespace NodeJS {
+  interface ProcessEnv {
+    USE_MOCKS?: string;
+    GOOGLE_CLIENT_ID?: string;
+    API_BASE_URL?: string;
+  }
+}
+
 /**
  * Frontend configuration class
  */

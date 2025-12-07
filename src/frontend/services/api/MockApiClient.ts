@@ -5,7 +5,7 @@
 
 import { IApiClient } from '../interfaces/IApiClient';
 import { WorkoutsResponse } from '@/shared/types/ApiResponse.types';
-import { MOCK_WORKOUTS } from '@/backend/infrastructure/data/mock-workouts.data';
+import { FRONTEND_MOCK_WORKOUTS } from '@/frontend/data/mock-workouts.data';
 
 /**
  * Mock API client for testing without backend
@@ -24,7 +24,7 @@ export class MockApiClient implements IApiClient {
     await this.delay(800);
 
     // Return mock data
-    const workouts = [...MOCK_WORKOUTS]; // Copy to avoid mutations
+    const workouts = [...FRONTEND_MOCK_WORKOUTS]; // Copy to avoid mutations
 
     console.log(`[MOCK API] Returning ${workouts.length} mock workouts`);
 

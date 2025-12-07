@@ -63,7 +63,7 @@ export class GoogleAuthService implements IAuthService {
         id: userInfo.id,
         email: userInfo.email || '',
         name: userInfo.name || '',
-        picture: userInfo.picture,
+        picture: userInfo.picture || undefined,
       };
     } catch (error: any) {
       console.error('Failed to get user info:', error.message);

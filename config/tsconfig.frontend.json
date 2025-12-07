@@ -2,7 +2,6 @@
   "extends": "./tsconfig.shared.json",
   "compilerOptions": {
     "outDir": "../dist/frontend",
-    "rootDir": "../src/frontend",
     "module": "ESNext",
     "target": "ES2020",
     "lib": ["ES2020", "DOM", "DOM.Iterable"],

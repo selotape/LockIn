@@ -107,7 +107,7 @@ describe('Workouts API', () => {
 
       expect(response.body).toEqual({
         success: false,
-        error: 'Empty access token',
+        error: 'Invalid Authorization header format. Expected: Bearer <token>',
       });
 
       expect(mockGetWorkoutsUseCase.execute).not.toHaveBeenCalled();

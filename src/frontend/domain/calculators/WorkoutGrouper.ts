@@ -42,6 +42,7 @@ export class WorkoutGrouper {
     return Object.entries(grouped).map(([date, workouts]) => ({
       date,
       workouts,
+      count: workouts.length,
     }));
   }
 
