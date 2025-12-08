@@ -62,6 +62,11 @@ class App {
     // Initialize auth service
     await this.authComponent.initialize();
 
+    // In mock mode, add a mock sign-in button
+    if (AppConfig.USE_MOCKS) {
+      this.setupMockSignInButton();
+    }
+
     // Check for saved token
     const savedToken = this.storageService.getItem('google_access_token');
     if (savedToken) {
@@ -70,6 +75,37 @@ class App {
     }
 
     console.log('App initialized');
+  }
+
+  /**
+   * Set up mock sign-in button
+   */
+  private setupMockSignInButton(): void {
+    const signInDiv = document.getElementById('signInDiv');
+    if (signInDiv) {
+      signInDiv.innerHTML = `
+        <div style="text-align: center; padding: 20px;">
+          <p style="margin-bottom: 10px; color: #666;">Running in MOCK mode</p>
+          <button id="mock-signin-btn" style="
+            background: #4285f4;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+          ">
+            Load Mock Workouts
+          </button>
+        </div>
+      `;
+
+      const mockSignInBtn = document.getElementById('mock-signin-btn');
+      if (mockSignInBtn) {
+        mockSignInBtn.onclick = () => this.handleSignIn();
+      }
+    }
   }
 
   /**
