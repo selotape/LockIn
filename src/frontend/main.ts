@@ -67,6 +67,9 @@ class App {
       this.setupMockSignInButton();
     }
 
+    // Set initial state to trigger UI update (show sign-in button)
+    this.appState.setState(AppStateEnum.SIGNED_OUT);
+
     // Check for saved token
     const savedToken = this.storageService.getItem('google_access_token');
     if (savedToken) {
