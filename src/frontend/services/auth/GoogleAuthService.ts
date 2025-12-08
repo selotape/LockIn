@@ -47,7 +47,10 @@ export class GoogleAuthService implements IAuthService {
       return;
     }
 
-    // Wait for Google library to load
+    // Load Google Sign-In SDK dynamically
+    await this.loadGoogleSDK();
+
+    // Wait for Google library to be ready
     await this.waitForGoogleLibrary();
 
     // Initialize Google Sign-In (for ID token)
@@ -130,6 +133,34 @@ export class GoogleAuthService implements IAuthService {
       size: 'large',
       text: 'signin_with',
       width: 250,
+    });
+  }
+
+  /**
+   * Load Google Sign-In SDK dynamically
+   */
+  private loadGoogleSDK(): Promise<void> {
+    return new Promise((resolve) => {
+      // Check if script already exists
+      if (document.querySelector('script[src*="accounts.google.com/gsi/client"]')) {
+        resolve();
+        return;
+      }
+
+      // Create and inject script tag
+      const script = document.createElement('script');
+      script.src = 'https://accounts.google.com/gsi/client';
+      script.async = true;
+      script.defer = true;
+      script.onload = () => {
+        console.log('Google Sign-In SDK loaded');
+        resolve();
+      };
+      script.onerror = () => {
+        console.error('Failed to load Google Sign-In SDK');
+        resolve(); // Resolve anyway to avoid hanging
+      };
+      document.head.appendChild(script);
     });
   }
 
