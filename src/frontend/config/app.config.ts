@@ -30,10 +30,18 @@ export class AppConfig {
   /**
    * Whether to use mock services (for development)
    */
-  static readonly USE_MOCKS: boolean =
-    (typeof window !== 'undefined' && window.ENV?.USE_MOCKS === 'true') ||
-    process.env.USE_MOCKS === 'true' ||
-    false;
+  static readonly USE_MOCKS: boolean = (() => {
+    const windowMocks = typeof window !== 'undefined' && window.ENV?.USE_MOCKS === 'true';
+    const processMocks = process.env.USE_MOCKS === 'true';
+    console.log('🔍 AppConfig USE_MOCKS calculation:', {
+      windowMocks,
+      processMocks,
+      'process.env.USE_MOCKS': process.env.USE_MOCKS,
+      'typeof process.env.USE_MOCKS': typeof process.env.USE_MOCKS,
+      'window.ENV': typeof window !== 'undefined' ? window.ENV : 'N/A'
+    });
+    return windowMocks || processMocks || false;
+  })();
 
   /**
    * Google OAuth2 Client ID
