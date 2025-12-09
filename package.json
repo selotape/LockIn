@@ -8,7 +8,7 @@
     "build:frontend": "webpack --config config/webpack.config.js --mode production",
     "start": "node dist/backend/server.js",
     "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
-    "dev:backend": "USE_MOCKS=true nodemon --watch src/backend -e ts --exec ts-node -r tsconfig-paths/register src/backend/server.ts",
+    "dev:backend": "USE_MOCKS=true PORT=8081 nodemon --watch src/backend -e ts --exec ts-node -r tsconfig-paths/register src/backend/server.ts",
     "dev:frontend": "USE_MOCKS=true webpack serve --config config/webpack.config.js --mode development",
     "test": "npm run test:backend && npm run test:frontend",
     "test:backend": "jest --config config/jest.config.backend.js",
