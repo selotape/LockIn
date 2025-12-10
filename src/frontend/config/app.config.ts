@@ -50,7 +50,7 @@ export class AppConfig {
     (typeof window !== 'undefined' &&
       window.ENV?.GOOGLE_CLIENT_ID) ||
     process.env.GOOGLE_CLIENT_ID ||
-    '***REMOVED***';
+    '';
 
   /**
    * API base URL (backend endpoint)
