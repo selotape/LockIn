@@ -127,11 +127,14 @@ To use real Google APIs:
    - Create OAuth 2.0 Client ID
    - Add `http://localhost:8080` to authorized origins
 
-2. Create `.env.development`:
-   ```env
-   USE_MOCKS=false
-   GOOGLE_CLIENT_ID=your-client-id.apps.googleusercontent.com
-   API_BASE_URL=http://localhost:8081
+2. Configure environment:
+   ```bash
+   # Copy the template file
+   cp .env.example .env.development
+
+   # Edit .env.development and add your credentials:
+   # USE_MOCKS=false
+   # GOOGLE_CLIENT_ID=your-client-id.apps.googleusercontent.com
    ```
 
 3. Start the app:
