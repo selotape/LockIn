@@ -149,8 +149,14 @@ class App {
   private showSignedOutState(): void {
     this.authComponent.showSignedOutState();
     this.loadingComponent.hide();
+    this.timelineComponent.clear();
     this.timelineComponent.hideAll();
     this.statsComponent.clear();
+
+    // Restore mock sign-in button if in mock mode
+    if (AppConfig.USE_MOCKS) {
+      this.setupMockSignInButton();
+    }
   }
 
   /**

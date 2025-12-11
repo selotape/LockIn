@@ -56,6 +56,7 @@ export class AuthComponent {
    * Show signed-in state
    */
   showSignedInState(): void {
+    this.signInDiv.innerHTML = ''; // Clear sign-in button
     this.signInDiv.style.display = 'none';
     this.signOutButton.style.display = 'block';
   }

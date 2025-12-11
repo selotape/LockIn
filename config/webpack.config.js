@@ -5,15 +5,20 @@ module.exports = (env, argv) => {
   const isDevelopment = argv.mode === 'development';
 
   // Default to mocks in development mode
-  const useMocks = process.env.USE_MOCKS !== undefined
-    ? process.env.USE_MOCKS
-    : (isDevelopment ? 'true' : 'false');
+  // Check both process.env and explicit 'true'/'false' values
+  const useMocks = process.env.USE_MOCKS === 'true' ||
+                   (process.env.USE_MOCKS === undefined && isDevelopment)
+    ? 'true'
+    : 'false';
+
+  console.log(`[Webpack] USE_MOCKS: ${useMocks} (from env: ${process.env.USE_MOCKS}, isDevelopment: ${isDevelopment})`);
 
   return {
     entry: './src/frontend/main.ts',
     output: {
       filename: 'bundle.js',
       path: path.resolve(__dirname, '../public/dist'),
+      publicPath: '/dist/',
       clean: true
     },
     resolve: {

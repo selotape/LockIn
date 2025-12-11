@@ -4,9 +4,9 @@
  */
 
 /**
- * Format a duration in milliseconds as "Xh Ym" or "Ym"
+ * Format a duration in milliseconds as "Xh Ymin" or "Y min"
  * @param milliseconds - Duration in milliseconds
- * @returns Formatted duration string (e.g., "2h 30m" or "45m")
+ * @returns Formatted duration string (e.g., "2h 30min" or "45 min")
  */
 export function formatDuration(milliseconds: number): string {
   const minutes = Math.floor(milliseconds / (1000 * 60));
@@ -14,9 +14,9 @@ export function formatDuration(milliseconds: number): string {
   const remainingMinutes = minutes % 60;
 
   if (hours > 0) {
-    return `${hours}h ${remainingMinutes}m`;
+    return `${hours}h ${remainingMinutes}min`;
   } else {
-    return `${remainingMinutes}m`;
+    return `${remainingMinutes} min`;
   }
 }
 
